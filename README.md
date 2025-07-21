@@ -1,4 +1,4 @@
-# -Multilingual-Retrieval-Augmented-Generation-RAG-System
+# Multilingual-Retrieval-Augmented-Generation-RAG-System
 
 A multilingual Retrieval-Augmented Generation (RAG) system that can understand and respond to both English and Bengali queries using HSC Bangla 1st paper content.
 
