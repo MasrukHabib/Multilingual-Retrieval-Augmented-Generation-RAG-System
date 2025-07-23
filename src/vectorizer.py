@@ -112,11 +112,7 @@ class Vectorizer:
             return []
 
 if __name__ == '__main__':
-    # Example usage for testing
-    # Ensure you have your OpenAI API key set in config.py or as an environment variable
-    # For testing, you can temporarily set it here if not using config.py
-    # os.environ["OPENAI_API_KEY"] = "YOUR_TEST_API_KEY" # ONLY FOR LOCAL TESTING, NOT FOR PRODUCTION
-
+    
     # Dummy chunks for testing
     test_chunks = [
         "কজলকাল পর্িপূণিরূকপ আত্মপ্রকাি কিল।",
