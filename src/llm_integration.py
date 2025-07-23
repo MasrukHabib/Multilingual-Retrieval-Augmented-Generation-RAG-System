@@ -1,133 +1,12 @@
-# import openai
-# import os
-# from typing import List
-
-# # Assuming config.py is in the parent directory
-# import sys
-# sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-# import config
-
-# class LLMIntegration:
-#     def __init__(self, api_key: str, model_name: str = config.GENERATION_MODEL):
-#         """
-#         Initializes the LLMIntegration with an OpenAI API key and model name.
-
-#         Args:
-#             api_key (str): Your OpenAI API key.
-#             model_name (str): The name of the OpenAI chat completion model to use.
-#         """
-#         openai.api_key = api_key
-#         self.model_name = model_name
-
-#     def generate_answer(self, query: str, context_chunks: List[str]) -> str:
-#         """
-#         Generates an answer to the query based on the provided context chunks
-#         using the OpenAI LLM.
-
-#         Args:
-#             query (str): The user's query.
-#             context_chunks (List[str]): A list of relevant text chunks retrieved from the knowledge base.
-
-#         Returns:
-#             str: The generated answer from the LLM.
-#                  Returns an error message if the generation fails.
-#         """
-#         if not context_chunks:
-#             # Fallback if no context is found, try to answer directly or inform the user
-#             messages = [
-#                 {"role": "system", "content": "You are a helpful assistant. If you don't have enough information, state that."},
-#                 {"role": "user", "content": f"Answer the following question: {query}"}
-#             ]
-#         else:
-#             # Construct the prompt with context
-#             context_str = "\n\n".join(context_chunks)
-            
-#             # System message to guide the LLM
-#             system_message = (
-#                 "You are an AI assistant that answers questions based on the provided text context. "
-#                 "If the answer is not found in the context, state that you don't have enough information. "
-#                 "Maintain a helpful and informative tone. Answer in the language of the query (English or Bangla)."
-#             )
-
-#             # User message with query and context
-#             user_message = (
-#                 f"Context:\n{context_str}\n\n"
-#                 f"Question: {query}\n\n"
-#                 "Answer:"
-#             )
-
-#             messages = [
-#                 {"role": "system", "content": system_message},
-#                 {"role": "user", "content": user_message}
-#             ]
-
-#         try:
-#             response = openai.chat.completions.create(
-#                 model=self.model_name,
-#                 messages=messages,
-#                 temperature=0.7, # Controls randomness. Lower for more focused answers.
-#                 max_tokens=500, # Max length of the generated answer
-#             )
-#             return response.choices[0].message.content.strip()
-#         except openai.APIError as e:
-#             print(f"OpenAI API Error during answer generation: {e}")
-#             return f"Sorry, I encountered an error while trying to generate an answer: {e}"
-#         except Exception as e:
-#             print(f"An unexpected error occurred during answer generation: {e}")
-#             return f"Sorry, an unexpected error occurred: {e}"
-
-# if __name__ == '__main__':
-#     # Example usage for testing
-#     # Ensure you have your OpenAI API key set in config.py or as an environment variable
-#     # For testing, you can temporarily set it here if not using config.py
-#     # os.environ["OPENAI_API_KEY"] = "YOUR_TEST_API_KEY" # ONLY FOR LOCAL TESTING, NOT FOR PRODUCTION
-
-#     if not config.OPENAI_API_KEY or config.OPENAI_API_KEY == "your_openai_api_key_here":
-#         print("Please set your OpenAI API key in config.py or as an environment variable to run this example.")
-#     else:
-#         llm_integrator = LLMIntegration(api_key=config.OPENAI_API_KEY)
-
-#         # Test case 1: With relevant context (Bangla)
-#         query_bangla = "বাংলা ভাষার জন্ম কোথা থেকে হয়েছে?"
-#         context_bangla = [
-#             "বাংলা ভাষা ইন্দো-ইউরোপীয় ভাষা পরিবারের সদস্য। এর উদ্ভব হয়েছে প্রাচীন ভারতীয় আর্য ভাষা থেকে।",
-#             "প্রাচীন ভারতীয় আর্য ভাষার তিনটি স্তর রয়েছে: বৈদিক, সংস্কৃত এবং প্রাকৃত।",
-#             "প্রাকৃত ভাষা থেকে মাগধী প্রাকৃতের মাধ্যমে বাংলা ভাষার জন্ম।"
-#         ]
-#         print(f"\n--- Testing LLM with Bangla Query and Context ---")
-#         answer_bangla = llm_integrator.generate_answer(query_bangla, context_bangla)
-#         print(f"Query: {query_bangla}")
-#         print(f"Answer: {answer_bangla}")
-
-#         # Test case 2: With relevant context (English)
-#         query_english = "When did the modern era of Bengali literature begin?"
-#         context_english = [
-#             "Ancient era's example is Charyapad. It was composed between the tenth and twelfth centuries.",
-#             "The medieval period started from the thirteenth century and ended in the mid-eighteenth century.",
-#             "The modern era extends from the beginning of the nineteenth century to the present."
-#         ]
-#         print(f"\n--- Testing LLM with English Query and Context ---")
-#         answer_english = llm_integrator.generate_answer(query_english, context_english)
-#         print(f"Query: {query_english}")
-#         print(f"Answer: {answer_english}")
-
-#         # Test case 3: Without context (should indicate lack of info)
-#         query_no_context = "Who invented the telephone?"
-#         print(f"\n--- Testing LLM with No Context ---")
-#         answer_no_context = llm_integrator.generate_answer(query_no_context, [])
-#         print(f"Query: {query_no_context}")
-#         print(f"Answer: {answer_no_context}")
-
-
 import openai
 import os
 from typing import List
-
-# Assuming config.py is in the parent directory
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 import config
 
+
+# LLMIntegration class for interacting with OpenAI's chat completion API
 class LLMIntegration:
     def __init__(self, api_key: str, model_name: str = config.GENERATION_MODEL):
         """
@@ -156,8 +35,7 @@ class LLMIntegration:
         # Construct the context string from chunks
         context_str = "\n\n".join(context_chunks) if context_chunks else ""
 
-        # System message: Guides the LLM's behavior and role.
-        # Emphasizes strict adherence to context and language matching.
+        # System message: Guides the LLM's behavior and role. Emphasizes strict adherence to context and language matching.
         system_message = (
             "You are an AI assistant designed to answer questions strictly based on the provided text context. "
             "If the answer is explicitly found in the context, provide it directly. "
@@ -178,8 +56,7 @@ class LLMIntegration:
                 f"{query}"
             )
         else:
-            # Fallback for when no relevant chunks are found.
-            # The system message already handles this, but we reinforce it.
+            # Fallback for when no relevant chunks are found. The system message already handles this, but we reinforce it.
             user_message = (
                 f"No specific context was found for your question. "
                 f"Please answer the following question based on general knowledge, or state if you cannot answer:\n"
@@ -207,10 +84,6 @@ class LLMIntegration:
             return f"দুঃখিত, একটি অপ্রত্যাশিত ত্রুটি হয়েছে: {e} (Sorry, an unexpected error occurred: {e})"
 
 if __name__ == '__main__':
-    # Example usage for testing
-    # Ensure you have your OpenAI API key set in config.py or as an environment variable
-    # For testing, you can temporarily set it here if not using config.py
-    # os.environ["OPENAI_API_KEY"] = "YOUR_TEST_API_KEY" # ONLY FOR LOCAL TESTING, NOT FOR PRODUCTION
 
     if not config.OPENAI_API_KEY or config.OPENAI_API_KEY == "your_openai_api_key_here":
         print("Please set your OpenAI API key in config.py or as an environment variable to run this example.")
@@ -221,7 +94,12 @@ if __name__ == '__main__':
         query_bangla = "অনুপমের ভাষায় সুপুরুষ কাকে বলা হয়েছে?"
         context_bangla = [
             "অনুপম তার মামার কাছে শুম্ভুনাথকে সুপুরুষ বলে বর্ণনা করেছে।",
-            "শুম্ভুনাথের স্বাস্থ্য ছিল সুঠাম এবং তার মুখশ্রী ছিল শান্ত ও গম্ভীর।"
+            "শুম্ভুনাথের স্বাস্থ্য ছিল সুঠাম এবং তার মুখশ্রী ছিল শান্ত ও গম্ভীর।",
+            "তার চোখ ছিল গভীর ও শান্ত, যা তার ব্যক্তিত্বের গম্ভীরতা প্রকাশ করে।",
+            "শুম্ভুনাথের হাসি ছিল মৃদু ও বিনয়ী, যা তার চরিত্রের নম্রতা নির্দেশ করে।",
+            "তার কথাবার্তা ছিল সংক্ষিপ্ত ও স্পষ্ট, যা তার আত্মবিশ্বাস ও বুদ্ধিমত্তার পরিচয় দেয়।",
+            "অনুপমের ভাষায়, শুম্ভুনাথের এই গুণাবলী তাকে সুপুরুষ হিসেবে চিহ্নিত করে।",
+            "সুপুরুষ বলতে বোঝানো হয়েছে একজন ব্যক্তির শারীরিক সৌন্দর্য, ব্যক্তিত্বের গুণাবলী এবং আচরণের নম্রতা।",
         ]
         print(f"\n--- Testing LLM with Bangla Query and Context ---")
         answer_bangla = llm_integrator.generate_answer(query_bangla, context_bangla)
