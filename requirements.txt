@@ -3,3 +3,11 @@ openai
 PyPDF2
 scikit-learn
 numpy
+pdfplumber 
+pillow
+pytesseract
+pdf2image
+langchain
+langchain_community
+faiss-cpu
+langchain_openai

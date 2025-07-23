@@ -1,3 +1,5 @@
 venv/ 
-.env/
+# Ignore .env file (contains sensitive information)
+.env
+
 __pycache__/

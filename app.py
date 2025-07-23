@@ -14,7 +14,7 @@ from src.llm_integration import LLMIntegration
 import config
 
 # --- Streamlit App Setup ---
-st.set_page_config(page_title="RAG System for Bangla Book", layout="centered")
+st.set_page_config(page_title="RAG System", layout="centered")
 
 st.title("Multilingual Retrieval-Augmented Generation (RAG) System")
 st.markdown("Ask questions in English or Bangla about the book content.")
@@ -78,6 +78,7 @@ def initialize_rag_components():
 retriever, llm_integrator, vectorizer_instance = initialize_rag_components()
 
 if retriever and llm_integrator and vectorizer_instance and vectorizer_instance.get_knowledge_base_data():
+   
     # --- User Input ---
     query = st.text_input("Enter your question (English or Bangla):", key="user_query")
 

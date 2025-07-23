@@ -9,7 +9,6 @@ class Retriever:
     def __init__(self, vectorizer: Vectorizer):
         """
         Initializes the Retriever with a Vectorizer instance.
-
         Args:
             vectorizer (Vectorizer): An instance of the Vectorizer class,
                                      which holds the embedding model and knowledge base embeddings.
@@ -70,7 +69,8 @@ class Retriever:
         return relevant_chunks
 
 if __name__ == '__main__':
-    # Example usage for testing
+
+
     import os
     import sys
     sys.path.append(os.path.dirname(os.path.dirname(__file__)))

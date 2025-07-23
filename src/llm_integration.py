@@ -45,8 +45,6 @@ class LLMIntegration:
             "Ensure your answer is in the same language as the user's query (e.g., if the query is in Bangla, answer in Bangla)."
             "Be concise and to the point."
         )
-
-        # User message: Provides the query and the context to the LLM.
         # Clearly separates context from the question.
         if context_str:
             user_message = (
@@ -72,8 +70,8 @@ class LLMIntegration:
             response = openai.chat.completions.create(
                 model=self.model_name,
                 messages=messages,
-                temperature=0.1, # Lower temperature for more deterministic, factual answers
-                max_tokens=500,  # Max length of the generated answer
+                temperature=0.1, 
+                max_tokens=500,  
             )
             return response.choices[0].message.content.strip()
         except openai.APIError as e:
@@ -98,6 +96,7 @@ if __name__ == '__main__':
             "তার চোখ ছিল গভীর ও শান্ত, যা তার ব্যক্তিত্বের গম্ভীরতা প্রকাশ করে।",
             "শুম্ভুনাথের হাসি ছিল মৃদু ও বিনয়ী, যা তার চরিত্রের নম্রতা নির্দেশ করে।",
             "তার কথাবার্তা ছিল সংক্ষিপ্ত ও স্পষ্ট, যা তার আত্মবিশ্বাস ও বুদ্ধিমত্তার পরিচয় দেয়।",
+            "অনুপমের মামাকে ভাগ্য দেবতা বলা হয়েছে",
             "অনুপমের ভাষায়, শুম্ভুনাথের এই গুণাবলী তাকে সুপুরুষ হিসেবে চিহ্নিত করে।",
             "সুপুরুষ বলতে বোঝানো হয়েছে একজন ব্যক্তির শারীরিক সৌন্দর্য, ব্যক্তিত্বের গুণাবলী এবং আচরণের নম্রতা।",
         ]

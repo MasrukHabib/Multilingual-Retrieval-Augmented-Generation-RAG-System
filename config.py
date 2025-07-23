@@ -4,11 +4,12 @@ import os
 # It is highly recommended to load this from an environment variable for security.
 # Example: OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "your_openai_api_key_here")
 # For this basic setup, you can directly paste it, but be cautious with sharing.
-OPENAI_API_KEY = "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" # Make sure this is your actual API key
+# OPENAI_API_KEY = "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" # Make sure this is your actual API key
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 # OpenAI Model Names
 EMBEDDING_MODEL = "text-embedding-ada-002"
-GENERATION_MODEL = "gpt-3.5-turbo" # You can change this to "gpt-4" or other models if available
+GENERATION_MODEL = "gpt-3.5-turbo" 
 
 # Document Chunking Parameters
 # Reduced CHUNK_SIZE to help manage overall context length
