@@ -19,11 +19,11 @@ def recursive_character_text_splitter(text: str, chunk_size: int, chunk_overlap:
 
     # Define separators in order of preference for semantic splitting
     separators = [
-        r"(?<=[।?!])\s+",  # Bangla sentence endings
-        r"\n\n+",         # Multiple newlines for paragraphs
-        r"\n",            # Single newline
-        r"\s",            # Whitespace
-        ""                # Fallback to character-level splitting
+        r"(?<=[।?!])\s+", 
+        r"\n\n+",        
+        r"\n",           
+        r"\s",           
+        ""                
     ]
 
     # Clean up multiple spaces and newlines before splitting
@@ -57,8 +57,6 @@ def recursive_character_text_splitter(text: str, chunk_size: int, chunk_overlap:
                     part += "\n"
                 elif separator_pattern == r"\s":
                     part += " "
-
-
             if len(part) > chunk_size:
                 chunks_from_parts.extend(_split_recursively(part, remaining_separators))
             else:

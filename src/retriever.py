@@ -2,8 +2,8 @@ import numpy as np
 from typing import List, Tuple
 from sklearn.metrics.pairwise import cosine_similarity
 
-# Assuming Vectorizer is in the same src directory
-from src.vectorizer import Vectorizer
+# Fixed import - since we're in the src directory, no need for src. prefix
+from vectorizer import Vectorizer
 
 class Retriever:
     def __init__(self, vectorizer: Vectorizer):
@@ -70,13 +70,17 @@ class Retriever:
 
 if __name__ == '__main__':
 
-
     import os
     import sys
+    
+    # Add parent directory to path to access config
     sys.path.append(os.path.dirname(os.path.dirname(__file__)))
     import config
-    from src.chunker import recursive_character_text_splitter
-    from src.data_loader import load_pdf_text
+    
+    # Import other modules from the same directory (src)
+    from chunker import recursive_character_text_splitter
+    from data_loader import load_pdf_text
+    from vectorizer import Vectorizer
 
     # Ensure OpenAI API key is set for Vectorizer
     if not config.OPENAI_API_KEY or config.OPENAI_API_KEY == "your_openai_api_key_here":
@@ -99,11 +103,11 @@ if __name__ == '__main__':
         """
         
         # For a real test, load from your PDF:
-        # pdf_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'knowledge_base', 'HSC26_Bangla_1st_paper.pdf')
-        # sample_text = load_pdf_text(pdf_path)
-        # if not sample_text:
-        #     print("Failed to load PDF text. Using dummy text for demonstration.")
-        #     sample_text = """... (your dummy text) ..."""
+        pdf_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'knowledge_base', 'HSC26_Bangla_1st_paper.pdf')
+        sample_text = load_pdf_text(pdf_path)
+        if not sample_text:
+            print("Failed to load PDF text. Using dummy text for demonstration.")
+            sample_text = """... (your dummy text) ..."""
 
         # 2. Chunk the text
         chunks = recursive_character_text_splitter(sample_text, chunk_size=config.CHUNK_SIZE, chunk_overlap=config.CHUNK_OVERLAP)

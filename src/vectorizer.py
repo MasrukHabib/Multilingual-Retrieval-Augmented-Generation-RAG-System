@@ -2,14 +2,14 @@ import openai
 import numpy as np
 import os
 from typing import List, Dict, Tuple
+import sys
 
 # LangChain imports
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
 from langchain.docstore.document import Document
 
-# Assuming config.py is in the parent directory
-import sys
+# Add parent directory to path to access config
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 import config
 
@@ -141,4 +141,3 @@ if __name__ == '__main__':
             print(f"First embedding (first 5 values): {kb_data[0][0][:5]}...")
         else:
             print("No embeddings were generated. Check API key and network connection.")
-
