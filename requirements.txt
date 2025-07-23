@@ -10,3 +10,5 @@ langchain
 langchain_community
 faiss-cpu
 langchain_openai
+Pypdf
+tiktoken
