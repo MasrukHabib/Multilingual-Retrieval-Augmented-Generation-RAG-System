@@ -59,8 +59,6 @@ class Retriever:
         similarities = cosine_similarity(query_embedding_np, kb_embeddings)[0]
 
         # 4. Get indices of top_k most similar chunks
-        # Use argsort to get indices that would sort the array, then take the last 'top_k'
-        # to get the indices of the largest values.
         top_k_indices = similarities.argsort()[-top_k:][::-1] # [::-1] to get in descending order of similarity
 
         # 5. Retrieve the actual chunks
