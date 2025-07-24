@@ -1,7 +1,7 @@
 import os
 
 # OpenAI API Key
-OPENAI_API_KEY = "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" # Make sure this is your actual API key
+OPENAI_API_KEY = "" # Make sure this is your actual API key 
 
 
 # OpenAI Model Names
@@ -22,7 +22,7 @@ PDF_FILE_NAME = "HSC26_Bangla_1st_paper.pdf"
 PDF_PATH = os.path.join(os.path.dirname(__file__), KNOWLEDGE_BASE_DIR, PDF_FILE_NAME)
 
 # Vector Database Settings
-VECTOR_DB_TYPE = "firestore"
-FIRESTORE_COLLECTION_NAME = "rag_chunks"
+VECTOR_DB_TYPE = "FASSI"
+FASSI_COLLECTION_NAME = "rag_chunks"
 
 
