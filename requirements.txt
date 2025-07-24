@@ -2,6 +2,7 @@ streamlit
 openai
 scikit-learn
 numpy
+PyPDF2
 pdfplumber 
 pillow
 pytesseract
