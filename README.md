@@ -42,13 +42,13 @@ PDF → Text Extraction → Chunking → Vectorization → Retrieval → LLM Gen
 - **Text Processing:** Custom Bangla-aware splitters
 
 ## Installation Process:
-step-0: clone the repositories
-step-1: Create a Virtual Environment 
+**step-0:** clone the repositories
+**step-1:** Create a Virtual Environment 
         python -m venv venv
         Activate the virtual environment: .\venv\Scripts\activate (for windows), source venv/bin/activate (for macOS/Linux:)
-Step-3: Install Dependencies
+**Step-3:** Install Dependencies
         pip install -r requirements.txt
-step-4: Run the web application 
+**step-4:** Run the web application 
         streamlit run app.py
   
 
